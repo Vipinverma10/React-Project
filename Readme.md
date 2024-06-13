@@ -81,3 +81,6 @@ import {Component} from "path";
 # 2 types Routing in web apps
 - Client Side Routing 
 - Server Side Routing
+
+# Functional Based Component/ Class Based Component
+- Difference between both 
