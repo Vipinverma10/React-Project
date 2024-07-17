@@ -6,32 +6,36 @@ class UserClass extends React.Component {
         super(props);
 
         this.state = {
-            count: 0,
-            count2: 1,
+            userInfo:{
+                name: "Dummy",
+                location: "Default",
+            }, 
         };
+
+        // console.log(this.props.name+ "Child Constructor");
+    }
+
+    async componentDidMount(){
+        // console.log("Parent Component Did Mount");
+        // API CALL
+
+        const data = await fetch("https://api.github.com/users/Vipinverma10");
+        const json = await data.json();
+
+        this.setState({
+            userInfo: json,
+        });
+
+        console.log(json);
     }
  
     render(){
         const{name, location}= this.props;
-        const{count, count2} = this.state;
+
+        // console.log(this.props.name+ "Child Render");
 
         return (
         <div className="user-card">
-            <h1>Count : {count}</h1>
-            <h1>Count : {count2}</h1>
-            <button 
-                onClick={() => {
-                // NEVER UPDTAE STATE VARIABLE DIRECTLY
-                // this.state.count = this.state.count+1;s
-                    this.setState({
-                        count: this.state.count + 1,
-                        count2: this.state.count2 + 10,
-
-                    });
-                }}
-            >
-                Count Increase
-            </button>
         <h2>Name: {name}</h2>
         <h3>Location: {location}</h3>
         <h4>Contact: vipinverma100118@gmail.com</h4>
@@ -41,3 +45,22 @@ class UserClass extends React.Component {
 }
 
 export default UserClass;
+
+
+/***
+ *  --Mounting --
+ * 
+ * Constructor (dummy)
+ * Render (dummy)
+ * <HTML Dummy>
+ * Component Did Mount
+ *      <API Call>
+ * <this.setState -> State variable is updated
+ * 
+ * ----UPDATE
+ * 
+ * render(API Data)
+ * <HTML (new API data)
+ * component Did Update
+ * 
+ */
